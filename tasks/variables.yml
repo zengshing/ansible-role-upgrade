@@ -5,4 +5,4 @@
 - name: Define upgrade_packages.
   set_fact:
     upgrade_packages: "{{ __upgrade_packages }}"
-  when: upgrade_packages is not define
+  when: upgrade_packages is not defined
