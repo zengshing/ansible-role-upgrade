@@ -1,0 +1,15 @@
+---
+- name: restart server
+  shell: 'sleep 1 && shutdown -r now "Reboot triggered by Ansible" && sleep 1'
+  async: 1
+  poll: 0
+  become: true
+
+- name: Wait for the server to finish rebooting
+  local_action:
+    module: wait_for
+      host="{{ ansible_host }}"
+      port="{{ ansible_port }}"
+      delay=10
+      timeout=300
+  become: false

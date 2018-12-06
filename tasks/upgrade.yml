@@ -1,0 +1,30 @@
+---
+- name: Install grub packages.
+  yum: "name={{ item }} state=present"
+  with_items:
+    - "{{ upgrade_packages }}"
+
+- name: Copy linux kernel 4.14.
+  copy:
+    remote_src: false
+    src: "{{ kernel_package }}"
+    dest: /opt/software
+
+- name:  Check if kernel version is upgrade to 4.4.
+  shell: uname -r
+  register: kernel_version
+
+- name: If kernel version is not 4.4.
+  yum:
+    name: /usr/local/src/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+    state: present
+  when: "4.4" not in kernel_version.stdout
+
+- name: Configure grub file.
+  lineinfile:
+    path: /etc/default/grub
+    regexp: "^GRUB_DEFAULT"
+    line: "GRUB_DEFAULT=0"
+
+- name: Update grub file.
+  shell: grub2-mkconfig -o /boot/grub2/grub.cfg

@@ -1,0 +1,11 @@
+---
+__upgrade_packages:
+  - ncurses-devel
+  - elfutils-libelf-devel
+  - screen
+  - dracut
+  - fileutils
+  - grubby
+  - initscripts
+  - linux-firmware
+  - module-init-tools

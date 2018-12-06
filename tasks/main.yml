@@ -1,0 +1,9 @@
+---
+- name: Add the OS specific variables.
+  include_tasks: variables.yml
+
+- name: Upgrade linux kernel.
+  include_tasks: upgrade.yml
+
+- name: Reboot machine.
+  include_tasks: reboot.yml
