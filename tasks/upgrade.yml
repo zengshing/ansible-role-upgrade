@@ -8,7 +8,7 @@
   copy:
     remote_src: false
     src: "{{ kernel_package }}"
-    dest: /opt/software
+    dest: /usr/local/src
 
 - name:  Check if kernel version is upgrade to 4.4.
   shell: uname -r
@@ -18,7 +18,7 @@
   yum:
     name: /usr/local/src/nginx-release-centos-6-0.el6.ngx.noarch.rpm
     state: present
-  when: "4.4" not in kernel_version.stdout
+  when: '"4.4" not in kernel_version.stdout'
 
 - name: Configure grub file.
   lineinfile:
