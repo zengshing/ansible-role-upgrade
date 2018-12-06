@@ -18,7 +18,7 @@
   yum:
     name: /usr/local/src/nginx-release-centos-6-0.el6.ngx.noarch.rpm
     state: present
-  when: '"4.4" not in kernel_version.stdout'
+  when: "4.4' not in kernel_version.stdout"
 
 - name: Configure grub file.
   lineinfile:
